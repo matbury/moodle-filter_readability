@@ -35,48 +35,65 @@ class filter_readability extends moodle_text_filter {
     
     function filter($text, array $options = array()) {
         
+        global $CFG;
+        
+        // Is the text longer that the min_length limit?
         if(strlen($text) < $CFG->filter_readability_min_length)
         {
             return $text;
         }
-        global $CFG;
+        
+        // Disable readability for this text?
+        if(preg_match('/readability_off/', $text) !== 0)
+        {
+            return $text;
+        }
         
         $text_statistics = new TextStatistics();
         
         switch($CFG->filter_readability_type)
         {
             case 'fkre':
-                $readability_stats = get_string('fkre','filter_readability').': '.$text_statistics->flesch_kincaid_reading_ease($text).' / 100';
+                $readability_stats = get_string('filtername','filter_readability').': '.$text_statistics->flesch_kincaid_reading_ease($text).' / 100';
                 $readability_link = get_string('fkre_link','filter_readability');
+                $readability_link_title = get_string('fkre','filter_readability');
                 break;
             case 'fkgl';
-                $readability_stats = get_string('fkgl','filter_readability').': '.$text_statistics->flesch_kincaid_grade_level($text);
+                $readability_stats = get_string('filtername','filter_readability').': '.$text_statistics->flesch_kincaid_grade_level($text);
                 $readability_link = get_string('fkgl_link','filter_readability');
+                $readability_link_title = get_string('fkre','filter_readability');
                 break;
             case 'gfi';
-                $readability_stats = get_string('gfi','filter_readability').': '.$text_statistics->gunning_fog_score($text);
+                $readability_stats = get_string('filtername','filter_readability').': '.$text_statistics->gunning_fog_score($text);
                 $readability_link = get_string('gfi_link','filter_readability');
+                $readability_link_title = get_string('fkre','filter_readability');
                 break;
             case 'cli';
-                $readability_stats = get_string('cli','filter_readability').': '.$text_statistics->coleman_liau_index($text);
+                $readability_stats = get_string('filtername','filter_readability').': '.$text_statistics->coleman_liau_index($text);
                 $readability_link = get_string('cli_link','filter_readability');
+                $readability_link_title = get_string('fkre','filter_readability');
                 break;
             case 'smogi';
-                $readability_stats = get_string('smogi','filter_readability').': '.$text_statistics->smog_index($text);
+                $readability_stats = get_string('filtername','filter_readability').': '.$text_statistics->smog_index($text);
                 $readability_link = get_string('smogi_link','filter_readability');
+                $readability_link_title = get_string('fkre','filter_readability');
                 break;
             case 'ari';
-                $readability_stats = get_string('ari','filter_readability').': '.$text_statistics->automated_readability_index($text);
+                $readability_stats = get_string('filtername','filter_readability').': '.$text_statistics->automated_readability_index($text);
                 $readability_link = get_string('ari_link','filter_readability');
+                $readability_link_title = get_string('fkre','filter_readability');
                 break;
             default:
                 // Default to Flesch-Kincaid Reading Ease
-                $readability_stats = get_string('fkre','filter_readability').': '.$text_statistics->flesch_kincaid_reading_ease($text).' / 100';
+                $readability_stats = get_string('filtername','filter_readability').': '.$text_statistics->flesch_kincaid_reading_ease($text).' / 100';
                 $readability_link = get_string('fkre_link','filter_readability');
+                $readability_link_title = get_string('fkre','filter_readability');
         }
         
-        $readability_stats_style = '<div style="float: right; padding: 10px; font-size: small;"><div style="background-color: #EEE; padding: 5px;"><a href="'.$readability_link.'" target="_blank" title="'.get_string('whats_this','filter_readability').'" >'.$readability_stats.'</a></div></div>';
+        //$readability_stats_style = '<div style="float: right; padding: 10px; font-size: small;"><div style="background-color: #EEE; padding: 5px;"><a href="'.$readability_link.'" target="_blank" title="'.$readability_link_title.' | '.get_string('whats_this','filter_readability').'" >'.$readability_stats.'</a></div></div>';
         
-        return $readability_stats_style.$text;
+        $readability_stats_style = '<a style="background-color: #EEE;" href="'.$readability_link.'" target="_blank" title="'.$readability_link_title.' | '.get_string('whats_this','filter_readability').'" >'.$readability_stats.'</a>';
+        
+        return $text.$readability_stats_style;
     }
 }
