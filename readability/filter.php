@@ -61,27 +61,27 @@ class filter_readability extends moodle_text_filter {
             case 'fkgl';
                 $readability_stats = get_string('filtername','filter_readability').': '.$text_statistics->flesch_kincaid_grade_level($text);
                 $readability_link = get_string('fkgl_link','filter_readability');
-                $readability_link_title = get_string('fkre','filter_readability');
+                $readability_link_title = get_string('fkgl','filter_readability');
                 break;
             case 'gfi';
                 $readability_stats = get_string('filtername','filter_readability').': '.$text_statistics->gunning_fog_score($text);
                 $readability_link = get_string('gfi_link','filter_readability');
-                $readability_link_title = get_string('fkre','filter_readability');
+                $readability_link_title = get_string('gfi','filter_readability');
                 break;
             case 'cli';
                 $readability_stats = get_string('filtername','filter_readability').': '.$text_statistics->coleman_liau_index($text);
                 $readability_link = get_string('cli_link','filter_readability');
-                $readability_link_title = get_string('fkre','filter_readability');
+                $readability_link_title = get_string('cli','filter_readability');
                 break;
             case 'smogi';
                 $readability_stats = get_string('filtername','filter_readability').': '.$text_statistics->smog_index($text);
                 $readability_link = get_string('smogi_link','filter_readability');
-                $readability_link_title = get_string('fkre','filter_readability');
+                $readability_link_title = get_string('smogi','filter_readability');
                 break;
             case 'ari';
                 $readability_stats = get_string('filtername','filter_readability').': '.$text_statistics->automated_readability_index($text);
                 $readability_link = get_string('ari_link','filter_readability');
-                $readability_link_title = get_string('fkre','filter_readability');
+                $readability_link_title = get_string('ari','filter_readability');
                 break;
             default:
                 // Default to Flesch-Kincaid Reading Ease
