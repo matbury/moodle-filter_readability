@@ -92,7 +92,7 @@ class filter_readability extends moodle_text_filter {
         
         //$readability_stats_style = '<div style="float: right; padding: 10px; font-size: small;"><div style="background-color: #EEE; padding: 5px;"><a href="'.$readability_link.'" target="_blank" title="'.$readability_link_title.' | '.get_string('whats_this','filter_readability').'" >'.$readability_stats.'</a></div></div>';
         
-        $readability_stats_style = '<a style="background-color: #DDD; padding: 3px;" href="'.$readability_link.'" target="_blank" title="'.$readability_link_title.' | '.get_string('whats_this','filter_readability').'" >'.$readability_stats.'</a>';
+        $readability_stats_style = '<a style="background-color: #DDD; padding: 2px;" href="'.$readability_link.'" target="_blank" title="'.$readability_link_title.' | '.get_string('whats_this','filter_readability').'" >'.$readability_stats.'</a>';
         
         return $text.$readability_stats_style;
     }
