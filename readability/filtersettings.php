@@ -43,6 +43,6 @@ if ($ADMIN->fulltree) {
     // Minimum text length
     $visiblename_len = get_string('min_length', 'filter_readability');
     $description_len = get_string('min_length_description', 'filter_readability');
-    $settings->add(new admin_setting_configtext('filter_readability_min_length', $visiblename_len, $description_len, 500, PARAM_INT, 10));
+    $settings->add(new admin_setting_configtext('filter_readability_min_length', $visiblename_len, $description_len, 1000, PARAM_INT, 10));
     
 }
